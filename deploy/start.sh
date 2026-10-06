@@ -10,4 +10,7 @@ php artisan migrate --force
 if [ "${SEED_DEMO:-false}" = "true" ]; then php artisan db:seed --force; fi
 php artisan config:cache
 php artisan route:cache
+a2dismod mpm_event mpm_worker
+a2enmod mpm_prefork
+apache2ctl configtest
 exec apache2-foreground
