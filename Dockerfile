@@ -1,4 +1,5 @@
 FROM php:8.4-apache
+RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
 RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev libonig-dev libxml2-dev unzip git && docker-php-ext-install pdo_pgsql pdo_mysql mbstring dom && a2enmod rewrite && rm -rf /var/lib/apt/lists/*
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 WORKDIR /var/www/html
